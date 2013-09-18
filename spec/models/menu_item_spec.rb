@@ -8,20 +8,11 @@ describe MenuItem do
       expect(menu_item).to be_valid
     end
 
-    it "requires a name" do
-      menu_item.name = ""
-      expect(menu_item).not_to be_valid
-    end
-
-    it "requires a description" do
-      menu_item.description = ""
-      expect(menu_item).not_to be_valid
-    end
-
-    it "requires a price_in_cents" do
-      menu_item.price_in_cents = nil
-      expect(menu_item).not_to be_valid
-    end
+    it { should_not have_valid(:name).when(nil, "") }
+    it { should_not have_valid(:description).when(nil, "") }
+    it { should_not have_valid(:category).when(nil, "", "Chezburger", "Pumpkins") }
+    it { should have_valid(:category).when("Seafood", "Vegetarian", "Pasta") }
+    it { should_not have_valid(:price_in_cents).when(nil) }
   end
 
   describe "displays price in dollars" do
