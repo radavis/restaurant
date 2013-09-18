@@ -10,9 +10,12 @@ describe MenuItem do
 
     it { should_not have_valid(:name).when(nil, "") }
     it { should_not have_valid(:description).when(nil, "") }
+    it { should_not have_valid(:price_in_cents).when(nil) }
+
     it { should_not have_valid(:category).when(nil, "", "Chezburger", "Pumpkins") }
     it { should have_valid(:category).when("Seafood", "Vegetarian", "Pasta") }
-    it { should_not have_valid(:price_in_cents).when(nil) }
+
+    it { should have_many(:comments) }
   end
 
   describe "displays price in dollars" do
