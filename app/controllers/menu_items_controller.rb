@@ -12,6 +12,10 @@ class MenuItemsController < ApplicationController
     @menu_item = MenuItem.new
   end
 
+  def edit
+    @menu_item = MenuItem.find(params[:id])
+  end
+
   def create
     @menu_item = MenuItem.new(menu_item_params)
 
@@ -23,12 +27,27 @@ class MenuItemsController < ApplicationController
     end
   end
 
+  def update
+    @menu_item = MenuItem.new(menu_item_params)
+
+    if @menu_item.update(menu_item_params)
+      redirect_to menu_item_path(@menu_item), notice: 'Menu item was successfully updated!! Hooray'
+    else
+      render action: 'edit'
+    end
+  end
+
+  def destroy
+    MenuItem.find(params[:id]).destroy
+    redirect_to menu_items_path, notice: "Menu item was successfully destroyed"
+  end
+
   private
   def menu_items
     @menu_items ||= MenuItem.all
   end
 
   def menu_item_params 
-    params.require(:menu_item).permit(:name, :description, :price_in_cents)
+    params.require(:menu_item).permit(:name, :description, :price_in_cents, :category)
   end
 end
