@@ -1,4 +1,6 @@
 class MenuItem < ActiveRecord::Base
+  has_many :comments
+
   CATEGORIES = %w{Seafood Pasta Vegetarian}
 
   validates_presence_of :name

@@ -1,7 +1,9 @@
 Restaurant::Application.routes.draw do
-  resources :comments
 
-  resources :menu_items
+
+  resources :menu_items do
+    resources :comments
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -43,7 +45,7 @@ Restaurant::Application.routes.draw do
   #       get 'recent', on: :collection
   #     end
   #   end
-  
+
   # Example resource route with concerns:
   #   concern :toggleable do
   #     post 'toggle'

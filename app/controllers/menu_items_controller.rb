@@ -6,6 +6,7 @@ class MenuItemsController < ApplicationController
 
   def show
     @menu_item = MenuItem.find(params[:id])
+    @comment = Comment.new
   end
 
   def new
@@ -47,7 +48,7 @@ class MenuItemsController < ApplicationController
     @menu_items ||= MenuItem.all
   end
 
-  def menu_item_params 
+  def menu_item_params
     params.require(:menu_item).permit(:name, :description, :price_in_cents, :category)
   end
 end

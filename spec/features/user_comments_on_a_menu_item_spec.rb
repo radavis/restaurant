@@ -11,7 +11,9 @@ describe 'a user comments on a menu item' do
       menu_item = FactoryGirl.create(:menu_item)
 
       visit menu_item_path(menu_item)
-      fill_in "Comment", with: 'Great tasting yummy meal'
+
+      #save_and_open_page
+      fill_in "comment_content", with: 'Great tasting yummy meal'
       click_on "Create Comment"
 
       expect(page).to have_content "Your comment was created successfully."
@@ -23,7 +25,8 @@ describe 'a user comments on a menu item' do
       menu_item = FactoryGirl.create(:menu_item)
 
       visit menu_item_path(menu_item)
-      fill_in "Comment", with: ''
+      #fill_in "Comment", with: ''
+      fill_in "comment_content", with: ''
       click_on "Create Comment"
 
       expect(page).to have_content "There was an issue with your comment. Please try again."
